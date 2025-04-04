@@ -1,62 +1,89 @@
-log_analyzer.py
+import os
+import re
+import json
+import csv
+import subprocess
+from datetime import datetime
+import requests
 
-import os import re import json import csv from datetime import datetime import subprocess
+# --- Telegram Config ---
+TELEGRAM_TOKEN = "7934281490:AAEHF4MRC5xX7tjY72-c4bqIOuW-x_kenAA"
+CHAT_ID = "215046961"  # Replace with your actual chat ID
 
---- Setup ---
+def send_telegram_alert(message):
+    url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
+    payload = {"chat_id": CHAT_ID, "text": message}
+    requests.post(url, data=payload)
 
-log_folder = os.path.expanduser("/pii-detector/output") archive_folder = os.path.expanduser("~/pii-detector/archive") os.makedirs(output_folder, exist_ok=True) os.makedirs(archive_folder, exist_ok=True)
+# --- Setup ---
+log_folder = os.path.expanduser("~/pii-detector/logs")
+output_folder = os.path.expanduser("~/pii-detector/output")
+archive_folder = os.path.expanduser("~/pii-detector/archive")
+os.makedirs(output_folder, exist_ok=True)
+os.makedirs(archive_folder, exist_ok=True)
 
---- PII Patterns ---
+# --- PII Patterns ---
+patterns = {
+    "Email": (r"[\w\.-]+@[\w\.-]+", "Medium"),
+    "Phone": (r"\+?\d{1,3}[-.\s]?\d{10}", "High"),
+    "Card": (r"\b(?:\d[ -]*?){13,16}\b", "High"),
+    "IP": (r"\b(?:\d{1,3}\.){3}\d{1,3}\b", "Low")
+}
 
-patterns = { "Email": (r"[\w.-]+@[\w.-]+", "Medium"), "Phone": (r"+?\d{1,3}[-.\s]?\d{10}", "High"), "Card": (r"\b(?:\d[ -]*?){13,16}\b", "High"), "IP": (r"\b(?:\d{1,3}.){3}\d{1,3}\b", "Low") }
+# --- Scan and Generate Reports ---
+for filename in os.listdir(log_folder):
+    if filename.endswith(".txt"):
+        filepath = os.path.join(log_folder, filename)
+        with open(filepath, "r") as file:
+            content = file.read()
 
---- Scan and Generate Reports ---
+        findings = []
+        redacted = content
 
-for filename in os.listdir(log_folder): if filename.endswith(".txt"): filepath = os.path.join(log_folder, filename) with open(filepath, "r") as file: content = file.read()
+        for pii_type, (regex, risk) in patterns.items():
+            matches = re.findall(regex, content)
+            for match in matches:
+                findings.append({"type": pii_type, "value": match, "risk": risk})
+                redacted = redacted.replace(match, "[REDACTED]")
+                if risk == "High":
+                    send_telegram_alert(f"[ALERT] High-risk PII found: {pii_type} → {match}")
 
-findings = []
-    redacted = content
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M")
+        base = os.path.splitext(filename)[0]
+        json_path = os.path.join(output_folder, f"{base}_report.json")
+        csv_path = os.path.join(output_folder, f"{base}_report.csv")
+        md_path = os.path.join(output_folder, f"{base}_report.md")
+        archive_name = os.path.join(archive_folder, f"{base}_{timestamp}.txt")
 
-    for pii_type, (regex, risk) in patterns.items():
-        matches = re.findall(regex, content)
-        for match in matches:
-            findings.append({"type": pii_type, "value": match, "risk": risk})
-            redacted = redacted.replace(match, "[REDACTED]")
+        with open(json_path, "w") as f:
+            json.dump(findings, f)
 
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M")
-    base = os.path.splitext(filename)[0]
-    json_path = os.path.join(output_folder, f"{base}_report.json")
-    csv_path = os.path.join(output_folder, f"{base}_report.csv")
-    md_path = os.path.join(output_folder, f"{base}_report.md")
-    archive_name = os.path.join(archive_folder, f"{base}_{timestamp}.txt")
+        with open(csv_path, "w", newline='') as f:
+            writer = csv.DictWriter(f, fieldnames=["type", "value", "risk"])
+            writer.writeheader()
+            writer.writerows(findings)
 
-    with open(json_path, "w") as f:
-        json.dump(findings, f)
+        with open(md_path, "w") as f:
+            f.write("### PII Detection\n")
+            for item in findings:
+                f.write(f"- {item['type']}: {item['value']} — {item['risk']}\n")
+            f.write("\n### Redacted Logs\n")
+            f.write(redacted)
 
-    with open(csv_path, "w", newline='') as f:
-        writer = csv.DictWriter(f, fieldnames=["type", "value", "risk"])
-        writer.writeheader()
-        writer.writerows(findings)
+        os.rename(filepath, archive_name)
+        print(f"Processed {filename}. Reports saved to output folder.")
 
-    with open(md_path, "w") as f:
-        f.write("### PII Detection\n")
-        for item in findings:
-            f.write(f"- {item['type']}: {item['value']} — {item['risk']}\n")
-        f.write("\n### Redacted Logs\n")
-        f.write(redacted)
+# --- Auto Sync JSON to Dashboard ---
+print("\n🔁 Syncing reports to React dashboard...")
+subprocess.run(["bash", "sync.sh"])
 
-    os.rename(filepath, archive_name)
-    print(f"Processed {filename}. Reports saved to output folder.")
+# --- Auto Open Dashboard in Browser ---
+print("🚀 Opening dashboard in browser...")
+subprocess.run(["termux-open-url", "http://localhost:3002"])
 
---- Auto Sync JSON to Dashboard ---
-
-print("\n🔁 Syncing reports to React dashboard...") subprocess.run(["bash", "sync.sh"])
-
---- Auto Open Dashboard in Browser ---
-
-print("🚀 Opening dashboard in browser...") subprocess.run(["termux-open-url", "http://localhost:3002"])
-
---- Weekly Archive Cleanup (Sunday) ---
-
-if datetime.now().strftime("%A") == "Sunday": print("🗂 Archiving scanned logs for weekly backup...") zip_filename = os.path.join(archive_folder, f"archive_backup_{datetime.now().strftime('%Y%m%d')}.zip") os.system(f"cd {archive_folder} && zip {zip_filename} *.txt && rm *.txt") print("✅ Archived and cleaned old logs.")
-
+# --- Weekly Archive Cleanup (Sunday) ---
+if datetime.now().strftime("%A") == "Sunday":
+    print("🗂 Archiving scanned logs for weekly backup...")
+    zip_filename = os.path.join(archive_folder, f"archive_backup_{datetime.now().strftime('%Y%m%d')}.zip")
+    os.system(f"cd {archive_folder} && zip {zip_filename} *.txt && rm *.txt")
+    print("✅ Archived and cleaned old logs.")
