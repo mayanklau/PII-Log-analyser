@@ -1,31 +1,39 @@
 import openai
 import os
 
-# Load API key from environment variable
+# Load API key
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 if not openai.api_key:
-    raise Exception("OpenAI key not found. Please set OPENAI_API_KEY in your environment.")
+    raise Exception("OPENAI_API_KEY is not set")
 
-# Load log file
-with open("sample_logs.txt", "r") as file:
-    logs = file.read()
+# Read sample log
+with open("sample_logs.txt", "r") as f:
+    logs = f.read()
 
-# Chunk logs to avoid token limit
-chunks = [logs[i:i+1500] for i in range(0, len(logs), 1500)]
+# Send to GPT
+response = openai.ChatCompletion.create(
+    model="gpt-3.5-turbo",
+    messages=[
+        {
+            "role": "system",
+            "content": (
+                "You're a security analyst. Detect any exposed PII in the following logs. "
+                "Use this format:\n- [TYPE]: [VALUE] — [RISK LEVEL]"
+            )
+        },
+        {
+            "role": "user",
+            "content": logs
+        }
+    ]
+)
 
-for i, chunk in enumerate(chunks):
-    response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
-        messages=[
-            {"role": "system", "content": "You're a security expert. Identify possible PII leaks (names, emails, IPs, phone numbers, card numbers, etc) in the logs below."},
-            {"role": "user", "content": chunk}
-        ]
-    )
+# Print GPT response
+result = response["choices"][0]["message"]["content"]
+print("\nGPT RAW RESPONSE:\n")
+print(result)
 
-    result = response['choices'][0]['message']['content']
-    
-    with open(f"pii_report_{i+1}.md", "w") as f:
-        f.write(result)
-
-print("Analysis complete. Reports saved as .md files.")
+# Save to file
+with open("pii_report_1.md", "w") as f:
+    f.write(result)
