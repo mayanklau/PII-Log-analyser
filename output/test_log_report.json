@@ -1,1 +1,27 @@
-[{"type": "Email", "value": "alice@example.com", "risk": "Medium"}, {"type": "Phone", "value": "+91-9876543210", "risk": "High"}, {"type": "IP", "value": "192.168.0.10", "risk": "Low"}, {"type": "Card", "value": "4111-1111-1111-1111", "risk": "High"}]
+[
+    {
+        "type": "Name",
+        "value": "Alice",
+        "risk": "Medium"
+    },
+    {
+        "type": "Email",
+        "value": "alice@example.com",
+        "risk": "High"
+    },
+    {
+        "type": "Phone",
+        "value": "+91-9876543210",
+        "risk": "Medium"
+    },
+    {
+        "type": "IP Address",
+        "value": "192.168.0.10",
+        "risk": "Low"
+    },
+    {
+        "type": "Credit Card",
+        "value": "4111-1111-1111-1111",
+        "risk": "High"
+    }
+]

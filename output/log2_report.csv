@@ -1,5 +1,6 @@
 type,value,risk
-Email,jane@example.com,Medium
-Phone,+0987654321,Low
-IP Address,10.0.0.2,Low
-Credit Card,4222-2222-2222-2222,High
+Name,Jane Smith,low
+Email,jane@example.com,medium
+Phone,+0987654321,medium
+IP Address,10.0.0.2,low
+Credit Card,4222-2222-2222-2222,high
