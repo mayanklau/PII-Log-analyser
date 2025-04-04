@@ -1,105 +1,94 @@
-PII Log Analyser – Fullstack GenAI Tool
+# PII Log Analyser – Fullstack GenAI Tool
 
-This is a fullstack GenAI-based tool that scans production logs for exposed PII, scores risk levels, sends alerts, and displays results on a React dashboard.
+This fullstack tool scans logs for PII using GenAI, assigns risk levels, sends Telegram alerts, and visualizes the results via a React dashboard.
 
 ---
 
 ## 📁 Project Structure
 
-pii-detector/ ├── log_analyzer.py         # Python script to detect & score PII ├── logs/                   # Raw input logs ├── output/                 # Reports (.json / .csv / .md) ├── archive/                # Processed logs with timestamps ├── sync.sh                 # Script to sync output → dashboard └── pii-dashboard/          # React frontend to visualize reports
+pii-detector/ ├── log_analyzer.py         # Python script: scans logs, exports reports ├── logs/                   # Raw input logs ├── output/                 # JSON, CSV, and Markdown reports ├── archive/                # Archived scanned logs (timestamped) ├── sync.sh                 # Sync script: copies reports to dashboard └── pii-dashboard/          # React app to visualize PII findings
 
 ---
 
-## ⚙️ 1. Run the PII Detection (Python backend)
+## ✅ How to Use
+
+### 1. Drop Logs to Be Scanned
 
 ```bash
 cd ~/pii-detector
-echo "Email: user@example.com, Card: 4111-1111-1111-1111" > logs/test.txt
-python log_analyzer.py
-
-This will:
-
-Detect PII from logs/
-
-Generate reports in output/
-
-Archive logs
-
-Send Telegram alerts for high-risk
-
-Auto-push to GitHub
-
+echo "Email: user@example.com, Card: 4111-1111-1111-1111" > logs/sample.txt
 
 
 ---
 
-🔄 2. Sync Reports to Frontend
+2. Run Full Workflow (Scanner + Sync + Dashboard)
 
-cd ~/pii-detector
-./sync.sh
-
-This will:
-
-Copy all .json reports from output/ to pii-dashboard/public/data/
-
+cd ~/pii-detector && python log_analyzer.py && ./sync.sh && cd pii-dashboard && npm start
 
 
 ---
 
-📊 3. Launch the Dashboard (React frontend)
+3. Open the Dashboard
 
-cd ~/pii-detector/pii-dashboard
-npm install   # only first time
-npm start
+Open this in your browser:
 
-Now open:
-http://localhost:3000 in your browser
+http://localhost:3002
+
+Or:
+
+termux-open-url http://localhost:3002
 
 You’ll see:
 
-A risk summary pie chart
+A pie chart for High / Medium / Low risk breakdown
 
-A color-coded PII table
+A color-coded table of PII items
 
 
 
 ---
 
-✅ Features
+🔄 Syncing Reports
 
-PII Detection via GPT (emails, phones, cards, IPs)
+After each scan, sync JSON reports to the dashboard:
+
+./sync.sh
+
+
+---
+
+⚙️ Features
+
+GPT-based PII detection
 
 High/Medium/Low risk scoring
 
-Markdown + CSV + JSON report export
+Markdown + CSV + JSON reports
 
-Auto redaction in logs
+Telegram alerts for High-risk PII
 
-Telegram alerts for high-risk PII
+Auto-archive scanned logs
 
-Auto-archive and weekly ZIP backup
+Weekly ZIP compression of archives
 
-React dashboard for visualization
-
-Fully local + GitHub versioned
+React dashboard with charts and tables
 
 
 
 ---
 
-✅ Future Add-ons
+✅ Future Roadmap
 
-Email or cloud upload of weekly ZIPs
+Auto-upload weekly ZIP to cloud/email
 
-Live API integration (FastAPI backend)
+Live FastAPI integration (no file sync needed)
 
-Search/filter by PII type or date
+Redacted log viewer in dashboard
 
-User-upload interface via dashboard
+Dashboard filters and sorting
 
 
 
 ---
 
-Made in Termux with GenAI and Zero Manual Coding.
-
+Built with Termux, GenAI, and a no-code mindset.
