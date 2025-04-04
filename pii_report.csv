@@ -1,5 +1,5 @@
 type,value,risk
-Email,john.smith@example.com,Medium
-Phone,+91-9876543210,Low
+Email,alice@example.com,Medium
+Phone,+91-9999999999,High
 IP,192.168.1.10,Low
-Credit Card,4111-1111-1111-1111,High
+Card,4111-1111-1111-1111,High
