@@ -1,33 +1,60 @@
-PII Log Analyser – Fullstack GenAI-Powered Tool
+PII Log Analyser – GenAI-Powered, No-Code Tool
 
-A complete GenAI-driven tool to detect and score PII in logs, auto-redact, sync reports to a React dashboard, trigger Telegram alerts, and visualize everything in real time.
+This is a complete, beginner-friendly PII (Personally Identifiable Information) detection tool built for non-coders using GenAI. It scans logs, detects sensitive data like emails and credit cards, assigns risk levels, redacts data, auto-generates reports, syncs to a dashboard, and visualizes results — all in one tap.
 
----
-
-## 📁 Project Structure
-
-pii-detector/ ├── log_analyzer.py         # Main script: scan, redact, score, sync, archive ├── logs/                   # Raw input logs (.txt) ├── output/                 # Generated reports (JSON, CSV, MD) ├── archive/                # Archived logs (timestamped + zipped) ├── sync.sh                 # Copies reports to React dashboard ├── run_all.sh              # Executes scanner + dashboard in one tap └── pii-dashboard/          # React dashboard (localhost:3002)
 
 ---
 
-## ✅ Quickstart (One-Liner)
+📁 Project Structure
 
-```bash
-cd ~/pii-detector && ./run_all.sh
+pii-detector/
+├── log_analyzer.py         # Main script: scan, redact, sync, archive
+├── logs/                   # Drop your .txt logs here
+├── output/                 # Reports (JSON, CSV, Markdown)
+├── archive/                # Archived logs (renamed + zipped)
+├── sync.sh                 # Script to copy reports to dashboard
+├── run_all.sh              # One-tap full execution
+└── pii-dashboard/          # React dashboard (runs on port 3002)
 
-This will:
 
-Scan logs in logs/
+---
 
-Generate reports in output/
+✅ One-Tap Scan and Dashboard Launch
 
-Archive processed logs to archive/
+Just run this:
 
-Sync reports to dashboard
+cd ~/pii-detector
+./run_all.sh
 
-Launch React UI in your browser
+It will:
 
-Start React server on localhost:3002
+Scan all .txt logs from the logs/ folder
+
+Detect emails, phones, cards, IPs using GenAI logic
+
+Create JSON, CSV, and Markdown reports
+
+Sync reports to the dashboard
+
+Launch the React dashboard in your browser
+
+Start dashboard server on http://localhost:3002
+
+
+
+---
+
+🔍 What You Can See on Dashboard
+
+Visit: http://localhost:3002
+
+You’ll see:
+
+Risk summary pie chart (High / Medium / Low)
+
+Color-coded table of PII values
+
+Supports multiple scanned reports
 
 
 
@@ -35,49 +62,27 @@ Start React server on localhost:3002
 
 ⚙️ Features
 
-GPT-based detection of:
+GenAI-powered PII detection (Emails, Phones, Cards, IPs)
 
-Emails, phone numbers, card numbers, IPs
+Redacted log output
 
+Risk scoring (High, Medium, Low)
 
-Risk scoring: High / Medium / Low
+Markdown + JSON + CSV exports
 
-Log redaction + Markdown summary
+Telegram alert for High-risk data
 
-JSON / CSV / MD report export
+Weekly archive ZIP (runs every Sunday)
 
-Telegram alert (high-risk findings)
+Auto dashboard open
 
-Weekly log ZIP archive (on Sundays)
-
-Auto-sync to dashboard
-
-Auto-open in browser
-
-One-touch launcher via run_all.sh
+Fully offline & terminal-friendly
 
 
 
 ---
 
-🖥️ Dashboard
-
-Location: http://localhost:3002
-Auto-launched via termux-open-url when scan completes.
-
-Displays:
-
-Risk pie chart
-
-Color-coded PII table
-
-Supports live synced .json reports
-
-
-
----
-
-🛠️ Manual Options
+🛠️ Manual Commands (if needed)
 
 Run scanner only:
 
@@ -87,28 +92,43 @@ Sync reports manually:
 
 ./sync.sh
 
-Start dashboard manually:
+Launch dashboard manually:
 
 cd pii-dashboard
+npm install   # (first time only)
 npm start -- --host 0.0.0.0 --port 3002
 
 
 ---
 
-🔮 Future Enhancements
+🔄 GitHub Setup (if cloning again)
 
-Upload ZIP to cloud or email weekly
+cd ~
+git clone https://github.com/mayanklau/PII-Log-analyser.git
+cd PII-Log-analyser
+chmod +x sync.sh run_all.sh
 
-Redacted log preview in dashboard
+Then run:
 
-Log search/filter in UI
+./run_all.sh
 
-Multi-user access and project tagging
 
-FastAPI backend integration
+---
+
+🔮 Future Add-Ons
+
+Log file upload in dashboard
+
+Redacted .md preview in UI
+
+Email ZIP weekly backup
+
+Filter/search inside dashboard table
 
 
 
 ---
 
-Built in Termux using GenAI. Works 100% offline and local.
+Built with Termux, GenAI and zero coding skills required.
+
+
