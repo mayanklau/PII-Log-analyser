@@ -1,5 +1,5 @@
 type,value,risk
 Email,john@example.com,Medium
-Phone,+1234567890,Low
-IP,192.168.1.100,Low
-Card,4111-1111-1111-1111,High
+Phone,+1234567890,Medium
+IP Address,192.168.1.100,Low
+Credit Card,4111-1111-1111-1111,High
