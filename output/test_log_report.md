@@ -1,1 +1,1 @@
-User: [PII - High], Email: [PII - High], Phone: [PII - High], IP: [PII - Low], Card: [PII - High]
+User: [NAME], Email: [EMAIL], Phone: [PHONE], IP: [IP], Card: [CARD]

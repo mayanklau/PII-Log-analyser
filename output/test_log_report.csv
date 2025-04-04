@@ -1,6 +1,5 @@
 type,value,risk
-Name,Alice,Medium
-Email,alice@example.com,High
-Phone,+91-9876543210,Medium
-IP Address,192.168.0.10,Low
-Credit Card,4111-1111-1111-1111,High
+Email,alice@example.com,medium
+Phone,+91-9876543210,high
+IP,192.168.0.10,low
+Card,4111-1111-1111-1111,high

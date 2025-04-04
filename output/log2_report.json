@@ -1,27 +1,7 @@
 [
-    {
-        "type": "Name",
-        "value": "Jane Smith",
-        "risk": "low"
-    },
-    {
-        "type": "Email",
-        "value": "jane@example.com",
-        "risk": "medium"
-    },
-    {
-        "type": "Phone",
-        "value": "+0987654321",
-        "risk": "medium"
-    },
-    {
-        "type": "IP Address",
-        "value": "10.0.0.2",
-        "risk": "low"
-    },
-    {
-        "type": "Credit Card",
-        "value": "4222-2222-2222-2222",
-        "risk": "high"
-    }
+    {"type": "Name", "value": "Jane Smith", "risk": "Medium"},
+    {"type": "Email", "value": "jane@example.com", "risk": "High"},
+    {"type": "Phone", "value": "+0987654321", "risk": "Medium"},
+    {"type": "IP Address", "value": "10.0.0.2", "risk": "Low"},
+    {"type": "Credit Card", "value": "4222-2222-2222-2222", "risk": "High"}
 ]

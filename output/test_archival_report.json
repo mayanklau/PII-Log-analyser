@@ -1,0 +1,12 @@
+[
+    {
+        "type": "email",
+        "value": "danger@example.com",
+        "risk": "high"
+    },
+    {
+        "type": "card",
+        "value": "5555-5555-5555-5555",
+        "risk": "medium"
+    }
+]

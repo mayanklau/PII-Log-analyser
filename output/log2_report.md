@@ -1,1 +1,1 @@
-User: [Name Redacted], Email: [Email Redacted], Phone: [Phone Redacted], IP: [IP Redacted], Card: [Card Redacted]
+User: [Name], Email: [Email], Phone: [Phone], IP: [IP], Card: [Card]

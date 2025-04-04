@@ -1,22 +1,27 @@
 [
     {
-        "type": "email",
+        "type": "Name",
+        "value": "John Doe",
+        "risk": "Medium"
+    },
+    {
+        "type": "Email",
         "value": "john@example.com",
-        "risk": "high"
+        "risk": "High"
     },
     {
-        "type": "phone",
+        "type": "Phone",
         "value": "+1234567890",
-        "risk": "medium"
+        "risk": "Medium"
     },
     {
-        "type": "IP address",
+        "type": "IP Address",
         "value": "192.168.1.100",
-        "risk": "low"
+        "risk": "Low"
     },
     {
-        "type": "credit card",
+        "type": "Credit Card",
         "value": "4111-1111-1111-1111",
-        "risk": "high"
+        "risk": "High"
     }
-]  
+]
