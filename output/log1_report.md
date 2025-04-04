@@ -1,7 +1,7 @@
 ### PII Detection
-- Name: John Doe — Low
+- Name: John Doe — Medium
 - Email: john@example.com — Medium
-- Phone: +1234567890 — High
+- Phone: +1234567890 — Medium
 - IP Address: 192.168.1.100 — Low
 - Credit Card Number: 4111-1111-1111-1111 — High
 

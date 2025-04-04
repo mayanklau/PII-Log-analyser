@@ -1,0 +1,1 @@
+User: Alice, Email: alice@example.com, Phone: +91-9876543210, IP: 192.168.0.10, Card: 4111-1111-1111-1111
