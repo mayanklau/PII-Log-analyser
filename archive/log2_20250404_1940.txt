@@ -1,1 +1,0 @@
-User: Jane Smith, Email: jane@example.com, Phone: +0987654321, IP: 10.0.0.2, Card: 4222-2222-2222-2222

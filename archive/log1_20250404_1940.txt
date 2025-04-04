@@ -1,1 +1,0 @@
-User: John Doe, Email: john@example.com, Phone: +1234567890, IP: 192.168.1.100, Card: 4111-1111-1111-1111
