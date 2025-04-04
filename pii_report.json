@@ -1,0 +1,4 @@
+[{"type": "Email", "value": "john.smith@example.com", "risk": "Medium"},
+{"type": "Phone", "value": "+91-9876543210", "risk": "Low"},
+{"type": "IP", "value": "192.168.1.10", "risk": "Low"},
+{"type": "Credit Card", "value": "4111-1111-1111-1111", "risk": "High"}]

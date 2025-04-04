@@ -1,8 +1,8 @@
-The log contains the following PII (Personally Identifiable Information):
-- Name: Jane Doe
-- Email: jane@example.com
-- Phone number: +91-9876543210
-- IP address: 10.0.0.1
-- Credit card number: 4111-1111-1111-1111
+### PII Detection
+- Type: john.smith@example.com — Medium
+- Type: +91-9876543210 — Medium
+- Type: 192.168.1.10 — Low
+- Type: 4111-1111-1111-1111 — High
 
-These details should be handled securely to prevent any unauthorized access or leaks of sensitive information.
+### Redacted Logs
+User: John Smith, Email: ***@***.com, Phone: +**-**********, IP: 192.168.1.10, Card: ****-****-****-****
