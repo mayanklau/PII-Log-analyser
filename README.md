@@ -1,127 +1,105 @@
-✅ Full README.md (Updated for April 2025)
+PII Log Analyser – Fullstack GenAI Tool
 
-# PII Log Analyzer (GPT-powered, Mobile-Ready)
-
-A GenAI-powered Python tool to automatically detect, score, redact, and report exposed PII in logs — fully portable and runs even inside **Termux** on Android.
+This is a fullstack GenAI-based tool that scans production logs for exposed PII, scores risk levels, sends alerts, and displays results on a React dashboard.
 
 ---
 
-## 🔍 What It Does
+## 📁 Project Structure
 
-- Detects PII (emails, phones, card numbers, IPs, etc.)
-- Tags findings with **High / Medium / Low** risk levels
-- Generates:
-  - Markdown reports (`.md`)
-  - JSON exports (`.json`)
-  - CSV exports (`.csv`)
-- Creates a **redacted copy** of logs with masked PII
-- Pushes findings to GitHub automatically
-- Runs daily via Termux `cron`
+pii-detector/ ├── log_analyzer.py         # Python script to detect & score PII ├── logs/                   # Raw input logs ├── output/                 # Reports (.json / .csv / .md) ├── archive/                # Processed logs with timestamps ├── sync.sh                 # Script to sync output → dashboard └── pii-dashboard/          # React frontend to visualize reports
 
 ---
 
-## ⚙️ How It Works
+## ⚙️ 1. Run the PII Detection (Python backend)
 
-1. Load production or dev logs into `sample_logs.txt`
-2. Run:
-   ```bash
-   python log_analyzer.py
+```bash
+cd ~/pii-detector
+echo "Email: user@example.com, Card: 4111-1111-1111-1111" > logs/test.txt
+python log_analyzer.py
 
-3. The tool:
+This will:
 
-Uses OpenAI GPT to detect PII
+Detect PII from logs/
 
-Scores and categorizes each item
+Generate reports in output/
 
-Creates redacted logs (redacted_logs.txt)
+Archive logs
 
-Saves outputs as pii_report_1.md, pii_report.csv, pii_report.json
+Send Telegram alerts for high-risk
 
-Automatically pushes results to GitHub
-
-
+Auto-push to GitHub
 
 
 
 ---
 
-🔐 Secure by Design
+🔄 2. Sync Reports to Frontend
 
-OpenAI API Key stored via environment variable (OPENAI_API_KEY)
+cd ~/pii-detector
+./sync.sh
 
-GitHub pushes use Personal Access Tokens (PAT)
+This will:
 
-No secrets hardcoded
-
-Safe to run in mobile or cloud setups
-
-
-
----
-
-🗓 Daily Auto Scan (via Cron)
-
-Enabled using Termux's built-in cron:
-
-crontab -e
-
-Example cron job:
-
-0 9 * * * cd ~/pii-detector && python log_analyzer.py >> cron_log.txt 2>&1
+Copy all .json reports from output/ to pii-dashboard/public/data/
 
 
 
 ---
 
-📁 Output Example
+📊 3. Launch the Dashboard (React frontend)
 
-pii_report_1.md: Human-readable risk-based summary
+cd ~/pii-detector/pii-dashboard
+npm install   # only first time
+npm start
 
-redacted_logs.txt: Masked version of your original logs
+Now open:
+http://localhost:3000 in your browser
 
-pii_report.csv: Structured tabular format
+You’ll see:
 
-pii_report.json: Ready for dashboard/analytics pipelines
+A risk summary pie chart
 
-
-
----
-
-🛠 Requirements
-
-Python 3 (Termux or any Linux/macOS)
-
-OpenAI API key (GPT-3.5+)
-
-Git installed and configured
+A color-coded PII table
 
 
 
 ---
 
-🚀 Future Enhancements
+✅ Features
 
-Telegram alert integration
+PII Detection via GPT (emails, phones, cards, IPs)
 
-Log type auto-detection (Apache, Nginx, etc.)
+High/Medium/Low risk scoring
 
-Weekly ZIP archive of all reports
+Markdown + CSV + JSON report export
 
-Streamlit Web UI (optional)
+Auto redaction in logs
+
+Telegram alerts for high-risk PII
+
+Auto-archive and weekly ZIP backup
+
+React dashboard for visualization
+
+Fully local + GitHub versioned
 
 
 
 ---
 
-🤖 Demo
+✅ Future Add-ons
 
-> Built and tested entirely inside Termux on Android.
+Email or cloud upload of weekly ZIPs
 
+Live API integration (FastAPI backend)
+
+Search/filter by PII type or date
+
+User-upload interface via dashboard
 
 
 
 ---
 
-🔗 Repository
+Made in Termux with GenAI and Zero Manual Coding.
 
-github.com/mayanklau/PII-Log-analyser
