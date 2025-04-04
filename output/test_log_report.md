@@ -1,1 +1,1 @@
-User: [NAME], Email: [EMAIL], Phone: [PHONE], IP: [IP], Card: [CARD]
+Name: John, Email: [Sensitive Data], Card: [Sensitive Data]

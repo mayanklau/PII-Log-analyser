@@ -1,5 +1,1 @@
 type,value,risk
-Email,alice@example.com,medium
-Phone,+91-9876543210,high
-IP,192.168.0.10,low
-Card,4111-1111-1111-1111,high
