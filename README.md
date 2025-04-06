@@ -1,92 +1,115 @@
-# PII Log Analyser — GenAI + Dashboard Powered Privacy Tool
+# GenAI-Powered PII Log Analyser
 
-A lightweight and fully local privacy tool to scan log files for Personally Identifiable Information (PII), score their risk, and view results in a React dashboard.
-
----
-
-## 🔧 Features
-
-- **GenAI-powered log scanning**
-- Detects PII like emails, phone numbers, IPs, PANs, card numbers
-- **Risk scoring**: High / Medium / Low
-- **Batch scan support** via logs folder
-- **Redacts sensitive data** from raw logs
-- **CSV, JSON, Markdown reports**
-- **Live React dashboard** to visualize findings
-- **Telegram alerts** for high-risk PII
-- **Auto-archive** scanned logs
-- **Works 100% in Termux** (Android)
-
----
-
-## ▶️ How to Use
-
-### 1. Clone the repo
-
-```bash
-git clone https://github.com/mayanklau/PII-Log-analyser.git
-cd PII-Log-analyser
-
-2. Install dependencies (Python + Node)
-
-pip install -r requirements.txt
-cd pii-dashboard
-npm install --legacy-peer-deps
-
-3. Run a sample scan
-
-cd ~/pii-detector
-echo "Email: test@example.com, Card: 4111-1111-1111-1111" > logs/test_input.txt
-python log_analyzer.py
-cp output/test_input_report.json pii-dashboard/public/data/
-
-4. Start the dashboard
-
-cd pii-dashboard
-npm start -- --host 0.0.0.0 --port 3002
-
-Then open http://192.168.x.x:3002 in Chrome
-(Replace with your local IP — use ip route | grep wlan0 to find it)
-
-
----
-
-⚙️ Upcoming Enhancements
-
-[ ] Auto-pick latest report file
-
-[ ] Export dashboard as PDF
-
-[ ] Filter by High / Medium / Low risk
-
-[ ] Multi-log timeline view
-
-[ ] Dark mode toggle
-
-
-
----
-
-🤖 Built With
-
-Python (Log Scanner)
-
-OpenAI API
-
-React + Chart.js
-
-Termux on Android
-
-
-
----
-
-> Designed and built by Mayank Lau
+A mobile-first GenAI tool built using **Termux** to scan logs for **PII (Personally Identifiable Information)**, classify by risk, and auto-sync results to a visual dashboard — with alerts, automation, and reporting built-in.
 
 ---
 
 ## 🎬 Demo Video
 
-Watch the GenAI-powered PII Log Analyser in action — scanning logs, detecting sensitive data, and syncing to a dashboard.
+Watch the tool in action:  
+[▶️ Watch the demo on YouTube](https://youtu.be/kR_bo8nmGw8)
+
+Or click the image below:
 
 [![Watch the demo on YouTube](https://img.youtube.com/vi/kR_bo8nmGw8/hqdefault.jpg)](https://youtu.be/kR_bo8nmGw8)
+
+---
+
+## ✅ Features
+
+- Scan logs with Python + RegEx + GPT
+- Classify PII (email, phone, card, IP, etc.) by **risk level**
+- Auto-generate reports in `.md`, `.csv`, `.json`
+- Archive redacted logs automatically
+- Push results to a **React dashboard**
+- Daily scan scheduler with `cron`
+- Telegram alerts for **high-risk PII**
+- Batch processing support
+- Built entirely on mobile (Termux)
+
+---
+
+## 🧪 Sample Output
+
+```text
+Email: test@example.com — Medium
+Phone: +91-9876543210 — High
+Card: 4111-1111-1111-1111 — High
+IP: 192.168.0.1 — Low
+
+
+---
+
+📁 Project Structure
+
+pii-detector/
+├── logs/              # Input log files
+├── output/            # Scanned reports
+├── archive/           # Redacted logs (archived)
+├── pii-dashboard/     # React dashboard (port 3001)
+├── demo.mp4           # Local demo video (optional)
+└── log_analyzer.py    # Main scanner
+
+
+---
+
+🚀 Run the Tool
+
+Scan logs manually:
+
+cd ~/pii-detector
+python log_analyzer.py
+
+View Dashboard (port 3001):
+
+cd ~/pii-detector/pii-dashboard
+npm install
+npm start
+
+Access at: http://localhost:3001
+
+
+---
+
+⏱️ Schedule Auto Scan (9AM daily)
+
+crontab -e
+
+Paste this:
+
+0 9 * * * cd ~/pii-detector && python log_analyzer.py >> cron_log.txt 2>&1
+
+
+---
+
+✅ Telegram Alerts
+
+Receive real-time alerts for high-risk detections via Telegram Bot.
+
+
+---
+
+Made using:
+
+Python (OpenAI API)
+
+React (Chart.js)
+
+Termux on Android
+
+Cron
+
+GitHub
+
+YouTube
+
+
+
+---
+
+Connect
+
+Have feedback or want to collaborate?
+Ping me on LinkedIn
+
+
