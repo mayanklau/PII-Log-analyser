@@ -81,7 +81,7 @@ Termux on Android
 
 ---
 
-> Designed and built by Mayank lau
+> Designed and built by Mayank Lau
 
 ---
 
