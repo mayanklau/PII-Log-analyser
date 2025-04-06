@@ -1,0 +1,1 @@
+lrwxrwxrwx. 1 u0_a471 u0_a471 28 Mar 30 16:42 /data/data/com.termux/files/home/storage/downloads -> /storage/emulated/0/Download
