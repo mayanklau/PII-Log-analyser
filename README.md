@@ -81,5 +81,12 @@ Termux on Android
 
 ---
 
-> Designed and built by Mayank Lau
-F
+> Designed and built by Mayank lau
+
+---
+
+## 🎬 Demo Video
+
+Watch how the GenAI-powered PII Log Analyser scans logs, detects sensitive information, and syncs results to a dashboard.
+
+[▶️ Click to watch demo](./demo.mp4)
