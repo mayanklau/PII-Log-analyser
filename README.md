@@ -1,134 +1,92 @@
-PII Log Analyser – GenAI-Powered, No-Code Tool
-
-This is a complete, beginner-friendly PII (Personally Identifiable Information) detection tool built for non-coders using GenAI. It scans logs, detects sensitive data like emails and credit cards, assigns risk levels, redacts data, auto-generates reports, syncs to a dashboard, and visualizes results — all in one tap.
+Awesome! Here's your updated README.md to reflect all your final features — optimized for a GitHub audience and non-coders:
 
 
 ---
 
-📁 Project Structure
+✅ README.md (Copy-Paste Ready)
 
-pii-detector/
-├── log_analyzer.py         # Main script: scan, redact, sync, archive
-├── logs/                   # Drop your .txt logs here
-├── output/                 # Reports (JSON, CSV, Markdown)
-├── archive/                # Archived logs (renamed + zipped)
-├── sync.sh                 # Script to copy reports to dashboard
-├── run_all.sh              # One-tap full execution
-└── pii-dashboard/          # React dashboard (runs on port 3002)
+# PII Log Analyser — GenAI + Dashboard Powered Privacy Tool
 
+A lightweight and fully local privacy tool to scan log files for Personally Identifiable Information (PII), score their risk, and view results in a React dashboard.
 
 ---
 
-✅ One-Tap Scan and Dashboard Launch
+## 🔧 Features
 
-Just run this:
-
-cd ~/pii-detector
-./run_all.sh
-
-It will:
-
-Scan all .txt logs from the logs/ folder
-
-Detect emails, phones, cards, IPs using GenAI logic
-
-Create JSON, CSV, and Markdown reports
-
-Sync reports to the dashboard
-
-Launch the React dashboard in your browser
-
-Start dashboard server on http://localhost:3002
-
-
+- **GenAI-powered log scanning**
+- Detects PII like emails, phone numbers, IPs, PANs, card numbers
+- **Risk scoring**: High / Medium / Low
+- **Batch scan support** via logs folder
+- **Redacts sensitive data** from raw logs
+- **CSV, JSON, Markdown reports**
+- **Live React dashboard** to visualize findings
+- **Telegram alerts** for high-risk PII
+- **Auto-archive** scanned logs
+- **Works 100% in Termux** (Android)
 
 ---
 
-🔍 What You Can See on Dashboard
+## ▶️ How to Use
 
-Visit: http://localhost:3002
+### 1. Clone the repo
 
-You’ll see:
-
-Risk summary pie chart (High / Medium / Low)
-
-Color-coded table of PII values
-
-Supports multiple scanned reports
-
-
-
----
-
-⚙️ Features
-
-GenAI-powered PII detection (Emails, Phones, Cards, IPs)
-
-Redacted log output
-
-Risk scoring (High, Medium, Low)
-
-Markdown + JSON + CSV exports
-
-Telegram alert for High-risk data
-
-Weekly archive ZIP (runs every Sunday)
-
-Auto dashboard open
-
-Fully offline & terminal-friendly
-
-
-
----
-
-🛠️ Manual Commands (if needed)
-
-Run scanner only:
-
-python log_analyzer.py
-
-Sync reports manually:
-
-./sync.sh
-
-Launch dashboard manually:
-
-cd pii-dashboard
-npm install   # (first time only)
-npm start -- --host 0.0.0.0 --port 3002
-
-
----
-
-🔄 GitHub Setup (if cloning again)
-
-cd ~
+```bash
 git clone https://github.com/mayanklau/PII-Log-analyser.git
 cd PII-Log-analyser
-chmod +x sync.sh run_all.sh
 
-Then run:
+2. Install dependencies (Python + Node)
 
-./run_all.sh
+pip install -r requirements.txt
+cd pii-dashboard
+npm install --legacy-peer-deps
+
+3. Run a sample scan
+
+cd ~/pii-detector
+echo "Email: test@example.com, Card: 4111-1111-1111-1111" > logs/test_input.txt
+python log_analyzer.py
+cp output/test_input_report.json pii-dashboard/public/data/
+
+4. Start the dashboard
+
+cd pii-dashboard
+npm start -- --host 0.0.0.0 --port 3002
+
+Then open http://192.168.x.x:3002 in Chrome
+(Replace with your local IP — use ip route | grep wlan0 to find it)
 
 
 ---
 
-🔮 Future Add-Ons
+⚙️ Upcoming Enhancements
 
-Log file upload in dashboard
+[ ] Auto-pick latest report file
 
-Redacted .md preview in UI
+[ ] Export dashboard as PDF
 
-Email ZIP weekly backup
+[ ] Filter by High / Medium / Low risk
 
-Filter/search inside dashboard table
+[ ] Multi-log timeline view
+
+[ ] Dark mode toggle
 
 
 
 ---
 
-Built with Termux, GenAI and zero coding skills required.
+🤖 Built With
+
+Python (Log Scanner)
+
+OpenAI API
+
+React + Chart.js
+
+Termux on Android
 
 
+
+---
+
+> Designed and built by Mayank Lau
+F
