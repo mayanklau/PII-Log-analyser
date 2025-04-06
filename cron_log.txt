@@ -1,1 +1,12 @@
 PII data exported to pii_report.json and pii_report.csv
+✅ Synced PII reports to dashboard!
+  adding: alert_test_20250404_2240.txt (deflated 16%)
+  adding: alert_test_20250405_1037.txt (deflated 16%)
+  adding: high_risk_test_20250404_2237.txt (deflated 24%)
+  adding: test_alert_20250404_2237.txt (deflated 23%)
+  adding: test_log_20250404_2237.txt (deflated 23%)
+
+🔁 Syncing reports to React dashboard...
+🚀 Opening dashboard in browser...
+🗂 Archiving scanned logs for weekly backup...
+✅ Archived and cleaned old logs.

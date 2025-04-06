@@ -1,0 +1,1 @@
+[{"type": "Email", "value": "alert@example.com", "risk": "Medium"}, {"type": "Phone", "value": "+91-9876543210", "risk": "High"}, {"type": "Card", "value": "5555-5555-5555-5555", "risk": "High"}]
