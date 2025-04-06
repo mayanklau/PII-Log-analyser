@@ -1,10 +1,3 @@
-Awesome! Here's your updated README.md to reflect all your final features — optimized for a GitHub audience and non-coders:
-
-
----
-
-✅ README.md (Copy-Paste Ready)
-
 # PII Log Analyser — GenAI + Dashboard Powered Privacy Tool
 
 A lightweight and fully local privacy tool to scan log files for Personally Identifiable Information (PII), score their risk, and view results in a React dashboard.
