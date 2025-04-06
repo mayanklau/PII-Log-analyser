@@ -87,6 +87,6 @@ Termux on Android
 
 ## 🎬 Demo Video
 
-Click the link below to view the full demo of the PII Log Analyser:
+Watch the GenAI-powered PII Log Analyser in action — scanning logs, detecting sensitive data, and syncing to a dashboard.
 
-**[▶️ Download or watch demo video (MP4)](https://github.com/mayanklau/PII-Log-analyser/blob/main/demo.mp4?raw=true)**
+[![Watch the demo on YouTube](https://img.youtube.com/vi/kR_bo8nmGw8/hqdefault.jpg)](https://youtu.be/kR_bo8nmGw8)
